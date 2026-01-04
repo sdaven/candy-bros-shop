@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "tsx src/lib/seed-products.ts"
+    "db:seed": "dotenv -e .env.local -- tsx src/lib/seed-products.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -33,6 +33,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
+    "dotenv-cli": "^11.0.0",
     "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.1",
