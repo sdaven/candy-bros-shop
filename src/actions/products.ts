@@ -84,7 +84,7 @@ export async function createProduct(formData: ProductFormData) {
     return { success: true, data: newProduct };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return { success: false, error: error.errors[0].message };
+      return { success: false, error: error.issues[0].message };
     }
     console.error("Error creating product:", error);
     return { success: false, error: "Failed to create product" };
@@ -116,7 +116,7 @@ export async function updateProduct(id: string, formData: ProductFormData) {
     return { success: true, data: updatedProduct };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return { success: false, error: error.errors[0].message };
+      return { success: false, error: error.issues[0].message };
     }
     console.error("Error updating product:", error);
     return { success: false, error: "Failed to update product" };

@@ -7,7 +7,7 @@ import { z } from "zod";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-12-18.acacia",
+  apiVersion: "2025-12-15.clover",
 });
 
 const checkoutSchema = z.object({
@@ -119,7 +119,7 @@ export async function createCheckoutSession(formData: CheckoutFormData) {
     return { success: true, url: session.url };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return { success: false, error: error.errors[0].message };
+      return { success: false, error: error.issues[0].message };
     }
     console.error("Checkout error:", error);
     return { success: false, error: "Failed to create checkout session" };

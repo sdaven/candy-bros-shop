@@ -3,7 +3,7 @@ import { ProductCard } from "@/components/storefront/ProductCard";
 
 export default async function ProductsPage() {
   const result = await getProducts();
-  const products = result.success ? result.data.filter(p => p.isActive) : [];
+  const products = result.success && result.data ? result.data.filter(p => p.isActive) : [];
 
   return (
     <div className="container mx-auto px-4 py-12">

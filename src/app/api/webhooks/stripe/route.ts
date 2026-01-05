@@ -6,12 +6,13 @@ import { orders } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-12-18.acacia",
+  apiVersion: "2025-12-15.clover",
 });
 
 export async function POST(req: Request) {
   const body = await req.text();
-  const signature = headers().get("stripe-signature");
+  const headersList = await headers();
+  const signature = headersList.get("stripe-signature");
 
   if (!signature) {
     return NextResponse.json(

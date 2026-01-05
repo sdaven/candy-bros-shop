@@ -5,7 +5,7 @@ import { ProductCard } from "@/components/storefront/ProductCard";
 
 export default async function Home() {
   const result = await getProducts();
-  const products = result.success ? result.data : [];
+  const products = result.success && result.data ? result.data : [];
   const featuredProducts = products.slice(0, 8);
 
   return (
