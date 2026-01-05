@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,10 +23,11 @@ export default function CheckoutPage() {
     deliveryInstructions: "",
   });
 
-  if (items.length === 0) {
-    router.push("/cart");
-    return null;
-  }
+  useEffect(() => {
+    if (items.length === 0) {
+      router.push("/cart");
+    }
+  }, [items, router]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
