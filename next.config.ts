@@ -1,21 +1,19 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  // Configure for /shop subdirectory deployment
-  basePath: process.env.NODE_ENV === "production" ? "/shop" : "",
-  assetPrefix: process.env.NODE_ENV === "production" ? "/shop" : "",
+  const nextConfig: NextConfig = {
+    basePath: "",
+    assetPrefix: "",
 
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
-  },
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "**",
+        },
+      ],
+    },
 
-  // Output standalone for self-hosting
-  output: "standalone",
-};
+    output: "standalone",
+  };
 
-export default nextConfig;
+  export default nextConfig;
