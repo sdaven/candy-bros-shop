@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart-context";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Plus, Trash2 } from "lucide-react";
 
 interface Product {
   id: string;
@@ -16,7 +16,10 @@ interface Product {
 }
 
 export function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
+  const { items, addItem, removeItem, updateQuantity } = useCart();
+
+  const cartItem = items.find((item) => item.id === product.id);
+  const quantity = cartItem?.quantity || 0;
 
   const handleAddToCart = () => {
     addItem({
@@ -25,6 +28,14 @@ export function ProductCard({ product }: { product: Product }) {
       price: parseFloat(product.price),
       imageUrl: product.imageUrl || undefined,
     });
+  };
+
+  const handleIncrement = () => {
+    updateQuantity(product.id, quantity + 1);
+  };
+
+  const handleRemove = () => {
+    removeItem(product.id);
   };
 
   return (
@@ -63,14 +74,36 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-center p-4 pt-0">
-        <Button
-          onClick={handleAddToCart}
-          disabled={product.stockQuantity === 0}
-          className="w-full"
-        >
-          <ShoppingCart className="h-4 w-4 mr-2" />
-          Add to Cart
-        </Button>
+        {quantity > 0 ? (
+          <div className="flex items-center justify-between w-full border-2 border-yellow-400 rounded-md bg-yellow-50">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleRemove}
+              className="h-10 w-10 hover:bg-yellow-100"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+            <span className="font-semibold text-lg">{quantity}</span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleIncrement}
+              className="h-10 w-10 hover:bg-yellow-100"
+            >
+              <Plus className="h-4 w-4" />
+            </Button>
+          </div>
+        ) : (
+          <Button
+            onClick={handleAddToCart}
+            disabled={product.stockQuantity === 0}
+            className="w-full"
+          >
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            Add to Cart
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
