@@ -39,7 +39,7 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full">
       <Link href={`/products/${product.id}`}>
         <div className="aspect-square bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
           {product.imageUrl ? (
@@ -53,7 +53,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </Link>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-1">
         <Link href={`/products/${product.id}`}>
           <h3 className="font-semibold text-lg mb-2 hover:text-purple-600 transition-colors">
             {product.name}
