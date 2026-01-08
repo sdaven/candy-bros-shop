@@ -62,7 +62,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="flex items-center justify-center p-4 pt-0">
         <Button
           onClick={handleAddToCart}
           disabled={product.stockQuantity === 0}
